@@ -1,100 +1,112 @@
 # Hardware and Software
 
-## Big Question
+## 🎯 Why Should I Care?
 
-What makes a computer useful?
+Most computer problems belong to one of two worlds: the physical equipment or the instructions running on it. Knowing the difference helps you ask whether a failure comes from hardware, software, or the way they interact.
 
-## Story
+## 🪨 Story — The Hunter and the Spear
 
-A hunter owns several tools:
+A hunter owns a spear, a bow, and a stone axe. These are physical tools that can be seen, touched, and carried.
 
-- A spear
-- A bow
-- A stone axe
+![A hunter carrying a physical tool](../images/01-before-linux/hunter-with-tool.png)
 
-These are physical objects. The hunter can see them, touch them, and carry them.
+The hunter must also know how to choose a tool, aim it, use it safely, and complete the hunt. That knowledge provides instructions for using the physical equipment.
 
-In the computer world, physical tools like these represent **hardware**.
+![A spear representing physical hardware](../images/01-before-linux/spear-hardware.png)
 
-![A hunter carrying a physical tool](../images/SH4.png)
-
-However, owning a spear is not enough. The hunter must also know:
-
-- How to hold it
-- How to aim it
-- When to throw it
-- How to hunt safely
-
-This knowledge tells the hunter how to use the tool. In the computer world, instructions that tell hardware what to do are called **software**.
-
-![A spear representing hardware](../images/SH5.png)
-
-## Hardware and Software Need Each Other
-
-Without hunting knowledge, the spear is just a tool that does nothing.
-
-Without a spear or another tool, hunting knowledge alone cannot perform the physical task.
-
-Both must work together:
+Without knowledge, the spear does nothing useful. Without a physical tool, knowledge alone cannot perform the task.
 
 ```text
-Physical Tool  +  Knowledge  =  Successful Hunt
-   Hardware    +  Software   =  Working Computer
+Physical tool + Knowledge = Successful hunt
+Hardware      + Software  = Working computer
 ```
 
-## From the Hunter to a Computer
+## 🖼️ From the Cave to Technology
 
 | Caveman World | Computer World |
 |---|---|
-| Spear, bow, and stone axe | Hardware |
-| Knowledge of how to hunt | Software |
-| Hunter following that knowledge | Computer running software |
-| Successful hunt | Completed computer task |
+| Spear, bow, and axe | Hardware |
+| Hunting knowledge | Software |
+| Hunter following instructions | Computer running a program |
+| Completed hunt | Completed task |
 
-## What Is Hardware?
+## 🧠 Hardware
 
-**Hardware** means the physical parts of a computer—the parts you can see and touch.
-
-Examples include:
-
-- CPU
-- RAM
-- SSD
-- Keyboard
-- Mouse
-- Monitor
-- Network card
-- Power supply
-
-Hardware performs the physical work, but it needs instructions before it knows what to do.
-
-## What Is Software?
-
-**Software** is a collection of programs and instructions that tells computer hardware what to do.
+**Hardware** means the physical parts of a computer.
 
 Examples include:
 
-- Operating systems such as Linux and Windows
-- Web browsers such as Firefox and Chrome
+- CPU and RAM
+- SSDs and hard drives
+- Network cards
+- Keyboards, mice, and monitors
+- GPUs and power supplies
+
+Hardware provides the ability to perform work, but it needs instructions.
+
+## 🧠 Software
+
+**Software** is a collection of programs and instructions that tells hardware what to do.
+
+Examples include:
+
+- Linux and Windows
+- Web browsers
 - Text editors
-- Games
-- Mobile applications
-- Server programs
+- Databases
+- Games and mobile applications
+- Web servers such as Nginx
 
-You cannot physically touch software, but you can store it on hardware and run it using hardware.
+Software is stored on hardware and executed using hardware.
 
-## How They Work Together
+## 🧠 How They Work Together
 
-Imagine opening a web browser:
+When you open a web browser:
 
-1. The **browser software** gives instructions.
-2. The **CPU** processes those instructions.
-3. **RAM** holds the information currently in use.
-4. The **SSD** stores the browser and its files.
-5. The **monitor** displays the result.
+1. The browser software provides instructions.
+2. The CPU executes those instructions.
+3. RAM holds the active program and data.
+4. Storage keeps the browser's files.
+5. The NIC sends and receives network data.
+6. The monitor displays the result.
 
-The browser cannot run without hardware, and the hardware cannot browse the web without software.
+Neither side is useful alone.
 
-## Simple Definition
+## 💻 How This Appears in Linux
 
-**Hardware is the equipment. Software is the instructions. Together, they make a working computer.**
+Linux exposes information about both layers:
+
+```bash
+lscpu                  # Inspect CPU hardware
+lsblk                  # Inspect storage hardware
+uname -r               # Show the running Linux kernel version
+ps -ef                 # Show running software processes
+```
+
+These commands help an administrator connect software activity to the hardware supporting it.
+
+## ☁️ Production Reality
+
+Engineers match software requirements to hardware or cloud resources:
+
+- Databases often benefit from memory and fast storage.
+- Web applications need enough CPU and network capacity.
+- AI software may require GPUs and large amounts of memory.
+- Containers package software, but still depend on host hardware.
+
+Buying faster hardware cannot always fix inefficient software, and optimized software cannot exceed every physical limit.
+
+## 🎯 Think Like an Engineer
+
+An application becomes slow after an update, but the hardware has not changed. What evidence would help you decide whether the new software is the cause?
+
+## 📌 Caveman Summary
+
+```text
+Spear     → Hardware
+Knowledge → Software
+Both      → Useful work
+```
+
+> **Hardware is the equipment. Software is the instructions. Together, they make a working computer.**
+

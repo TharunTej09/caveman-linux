@@ -1,98 +1,132 @@
 # Server Fundamentals
 
-## Big Question
+## 🎯 Why Should I Care?
 
-How can an entire village share important resources without losing them?
+Servers power most digital services you use:
 
-## Story
+- Websites and mobile applications
+- Email and online banking
+- Cloud platforms
+- Docker and Kubernetes workloads
+- Data pipelines and AI applications
 
-One hundred cavemen live together in a village.
+Understanding what a server does gives you a reason to learn Linux: Linux is one of the main operating systems used to run and manage servers.
 
-Every day, they need:
+## 🪨 Story — The Village Has a Storage Problem
 
-- Food
-- Water
-- Weapons
-- Tools
-- Medicine
+One hundred cavemen live together. Every day they need food, water, weapons, tools, and medicine.
 
-![The caveman village](../images/SH1.png)
+![A caveman village sharing resources](../images/01-before-linux/village-community.png)
 
-At first, everyone keeps their supplies inside their own cave. Soon, problems begin to appear:
+At first, everyone keeps supplies inside their own cave. Soon:
 
 - Food goes missing.
-- Weapons get lost.
-- Tools are difficult to find.
-- Nobody knows who owns each item.
-- Some caves have too many supplies while others have none.
+- Weapons are difficult to find.
+- Tools are duplicated or forgotten.
+- Some caves have too much while others have nothing.
 
-The chief needs a better system. He builds one large, protected **storage cave** where the village can keep and manage its shared resources.
+Chief Grog creates one protected **storage cave** where shared resources can be organized and provided to the village.
 
-![The shared storage cave](../images/SH2.png)
+![The village's shared storage cave](../images/01-before-linux/shared-storage-cave.png)
 
-Whenever a hunter needs something, they travel to the storage cave and ask for it. The cave receives the request, finds the requested item, and gives it to the hunter.
+When a hunter needs a spear, the hunter asks the storage keeper. The keeper finds the spear and returns it.
 
-In the computer world, this storage cave is called a **server**.
+![The storage cave providing a shared service](../images/01-before-linux/storage-cave-server.png)
 
-![The storage cave acting as a server](../images/SH3.png)
+In computing, the shared storage cave behaves like a **server**.
 
-![A hunter communicating with the storage cave](../diagram/hunter.svg)
+## 🖼️ From the Cave to Technology
 
-## From the Village to Technology
+![A hunter communicating with the storage cave](../images/01-before-linux/client-server-flow.svg)
 
 | Caveman World | Computer World |
 |---|---|
 | Hunter | Client |
-| Storage Cave | Server |
-| Village Road | Network |
+| Storage cave | Server |
+| Village road | Network |
 | Asking for a spear | Request |
-| Receiving the spear | Response |
+| Receiving a spear | Response |
+| Food, tools, and medicine | Data, applications, and services |
 
-## How the Client–Server Model Works
+## 🧠 What Is a Server?
 
-The **client** asks for a resource or service. The **server** receives the request, processes it, and sends back a response. The request and response travel through a **network**.
+A **server** is a computer or software system that provides resources or services to other computers over a network.
+
+The word *server* can describe:
+
+1. A physical or virtual computer running server software.
+2. A program that listens for requests and sends responses.
+
+The computers or applications making those requests are called **clients**.
 
 ```text
 Client  ── Request ──>  Server
 Client  <─ Response ──  Server
 ```
 
-In the village:
+## 🧠 Common Server Roles
 
-```text
-Hunter  ── Asks for a spear ──>  Storage Cave
-Hunter  <── Receives a spear ──  Storage Cave
-```
-
-## What Is a Server?
-
-A **server** is a computer that provides resources or services to other computers over a network.
-
-A server can provide many kinds of resources:
-
-| Server Type | What It Provides |
+| Server Role | What It Provides |
 |---|---|
-| Web server | Websites and web pages |
-| File server | Files and folders |
-| Email server | Email messages |
-| Database server | Organized data |
-| Game server | Online game sessions |
-| Media server | Videos, music, and images |
+| Web server | Websites and web content |
+| File server | Shared files and directories |
+| Database server | Stored and organized data |
+| Email server | Email delivery and storage |
+| Application server | Business logic and application features |
+| Media server | Video, audio, and images |
 
-## Real-World Example: Watching YouTube
+One server can perform several roles, and one service can also be spread across many servers.
 
-When you open a video on your phone:
+## 💻 How This Appears in Linux
 
-1. Your phone acts as the **client**.
-2. It sends a **request** through the internet.
-3. A YouTube **server** receives the request.
-4. The server sends the video back as a **response**.
+Linux administrators often begin by identifying a server and checking its basic health:
 
-```text
-Phone  ── Video request ──>  Internet  ──>  YouTube Server
-Phone  <────── Video ─────  Internet  <──  YouTube Server
+```bash
+hostname
+uptime
+free -h
+df -h
+ip addr
 ```
 
-## Simple Definition
+| Command | What It Helps You See |
+|---|---|
+| `hostname` | Which server you are using |
+| `uptime` | How long it has run and its current load |
+| `free -h` | Available and used memory |
+| `df -h` | Filesystem space |
+| `ip addr` | Network interfaces and IP addresses |
 
-A **client asks**, a **server provides**, and a **network connects them**.
+You do not need to memorize the output yet. For now, notice that Linux provides tools for observing and managing the server.
+
+## ☁️ Production Reality
+
+In production systems:
+
+- AWS EC2, Azure Virtual Machines, and Google Compute Engine provide virtual servers.
+- Docker containers commonly run applications on Linux hosts.
+- Kubernetes coordinates containerized applications across groups of servers.
+- Databases and data platforms run services that accept client requests.
+- AI model servers accept prompts or data and return generated results.
+
+Large services rarely depend on only one machine. Engineers use multiple servers so the service can handle more users and continue working when a machine fails.
+
+## 🎯 Think Like an Engineer
+
+The village grows from 100 people to one million. What is likely to become a problem first: storage space, road capacity, the number of storage workers, or security?
+
+How could Chief Grog prevent the entire village from depending on one storage cave?
+
+## 📌 Caveman Summary
+
+```text
+Hunter       → Client
+Village road → Network
+Storage cave → Server
+Spear        → Resource
+Ask          → Request
+Receive      → Response
+```
+
+> **A client asks, a server provides, and a network connects them.**
+
