@@ -74,16 +74,16 @@ Neither side is useful alone.
 
 ## 💻 How This Appears in Linux
 
-Linux exposes information about both layers:
+Linux can show whether something is a physical device, an executable program, or a running instance of that program:
 
 ```bash
-lscpu                  # Inspect CPU hardware
-lsblk                  # Inspect storage hardware
-uname -r               # Show the running Linux kernel version
-ps -ef                 # Show running software processes
+lspci                         # List hardware connected through PCI
+file /bin/ls                  # Identify what kind of software file /bin/ls is
+command -V ls                 # Show which ls command the shell will run
+ps -eo pid,comm,args --sort=pid  # Show running software processes
 ```
 
-These commands help an administrator connect software activity to the hardware supporting it.
+This is the key distinction: `lspci` discovers devices, `file` and `command` inspect stored software, and `ps` shows software currently executing. The hardware lesson inspects component capacity in detail; this lesson focuses on recognising the boundary between the two layers.
 
 ## ☁️ Production Reality
 
@@ -109,4 +109,3 @@ Both      → Useful work
 ```
 
 > **Hardware is the equipment. Software is the instructions. Together, they make a working computer.**
-

@@ -89,15 +89,14 @@ Linux manages network interfaces, addresses, connections, and the movement of da
 ## 💻 How This Appears in Linux
 
 ```bash
-uname -r                    # Show the running kernel version
-ps -ef                      # List processes
-free -h                     # Show memory usage
-lsblk                       # Show storage devices
-ip addr                     # Show network interfaces
-systemctl status nginx      # Check a service
+ps -eo pid,ni,stat,comm      # See processes, priority, and current state
+findmnt                      # See the filesystem layout Linux presents
+ls -l /dev | head           # See device interfaces managed by the kernel
+id                           # See the current user's identity and groups
+ip -brief link               # See network links managed by Linux
 ```
 
-Each command observes something Chief Grog—Linux—is coordinating.
+Each command reveals a different operating-system responsibility: scheduling work, organising storage, exposing devices, enforcing identity, and controlling network interfaces. Detailed performance and service diagnosis is intentionally saved for the troubleshooting lesson.
 
 ## ☁️ Production Reality
 
@@ -124,4 +123,3 @@ Chief Grog  → Linux
 ```
 
 > **Linux is the chief of the computer: it coordinates work, resources, devices, and access.**
-

@@ -79,25 +79,21 @@ One server can perform several roles, and one service can also be spread across 
 
 ## 💻 How This Appears in Linux
 
-Linux administrators often begin by identifying a server and checking its basic health:
+This lesson is about a server's **role**: what service it offers and how a client reaches it. These commands focus on that relationship rather than general system health:
 
 ```bash
-hostname
-uptime
-free -h
-df -h
-ip addr
+systemctl list-units --type=service --state=running  # Show active services
+ss -lnt                                              # Show listening TCP ports
+curl -I http://localhost                             # Ask a local web service for headers
 ```
 
-| Command | What It Helps You See |
+| Command | Server Question It Answers |
 |---|---|
-| `hostname` | Which server you are using |
-| `uptime` | How long it has run and its current load |
-| `free -h` | Available and used memory |
-| `df -h` | Filesystem space |
-| `ip addr` | Network interfaces and IP addresses |
+| `systemctl list-units ...` | Which services are currently running? |
+| `ss -lnt` | Which network doors are waiting for clients? |
+| `curl -I http://localhost` | Does the local web server return a response? |
 
-You do not need to memorize the output yet. For now, notice that Linux provides tools for observing and managing the server.
+`curl` may fail if no web server is installed. That failure is still useful: a machine becomes a web server only when the relevant service is installed, running, and reachable.
 
 ## ☁️ Production Reality
 
@@ -129,4 +125,3 @@ Receive      → Response
 ```
 
 > **A client asks, a server provides, and a network connects them.**
-

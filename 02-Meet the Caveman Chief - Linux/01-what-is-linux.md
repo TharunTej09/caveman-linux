@@ -174,16 +174,16 @@ Linux coordinates CPU time, RAM, storage, networking, and access to GPUs while t
 
 ## ⚡ Linux Commands
 
-Use these commands to ask the Chief about the system:
+Use these commands to examine Linux itself—the kernel at the centre of the system:
 
 ```bash
-uname -a                # Show kernel and system information
-hostnamectl             # Show hostname and operating system details
-cat /etc/os-release     # Identify the Linux distribution
-uptime                  # Show how long the system has been running
+uname -s                # Show the kernel name: Linux
+uname -r                # Show the running kernel release
+uname -m                # Show the machine architecture Linux is running on
+cat /proc/version       # Show how and with which compiler the kernel was built
 ```
 
-> `hostnamectl` may not be available on minimal Linux systems. The other commands still provide the essential information.
+The distribution lesson will inspect `/etc/os-release`; this lesson deliberately stays focused on the Linux kernel.
 
 ---
 
@@ -191,13 +191,13 @@ uptime                  # Show how long the system has been running
 
 Open a Linux terminal and complete the following investigation.
 
-1. Run `cat /etc/os-release` and identify the distribution name and version.
-2. Run `uname -r` and record the kernel version.
-3. Run `hostname` and identify the computer's hostname.
-4. Run `uptime` and find how long the system has been running.
-5. Compare your operating system version with your kernel version. Are they the same?
+1. Run `uname -s` and confirm the kernel name.
+2. Run `uname -r` and record the kernel release.
+3. Run `uname -m` and identify the machine architecture.
+4. Run `cat /proc/version` and find the compiler used to build the kernel.
+5. Explain why the kernel name, kernel release, and machine architecture describe different facts.
 
-**Expected discovery:** the Linux distribution and Linux kernel have different names and version numbers because the kernel is only one part of the complete operating system.
+**Expected discovery:** “Linux” names the kernel, while the release and architecture identify the particular kernel build and hardware platform.
 
 ---
 

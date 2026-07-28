@@ -95,18 +95,20 @@ When you open a website:
 Linux provides tools for observing client–server communication:
 
 ```bash
-curl -I https://example.com
-ss -tulpn
-ip addr
+curl -I https://example.com          # Send a request and read response headers
+curl -v https://example.com -o /dev/null  # Observe connection and HTTPS details
+getent hosts example.com             # Resolve the server name to an address
+ss -tn                               # Show current TCP conversations
 ```
 
 | Command | What It Shows |
 |---|---|
 | `curl -I` | Response headers returned by a web server |
-| `ss -tulpn` | Listening ports and network connections |
-| `ip addr` | Local network interfaces and addresses |
+| `curl -v` | The request, connection, TLS, and response conversation |
+| `getent hosts` | The address found for a server name |
+| `ss -tn` | Active TCP client–server connections |
 
-Some process details shown by `ss` may require elevated permissions.
+`curl -I` also appeared in Server Fundamentals to prove that a service answers. Here it is repeated for a different reason: to examine the **request → response** exchange itself.
 
 ## ☁️ Production Reality
 
