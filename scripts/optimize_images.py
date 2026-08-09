@@ -16,6 +16,9 @@ except ImportError:
 
 ROOT = Path(__file__).resolve().parents[1]
 IMAGE_ROOT = ROOT / "images"
+# PNG encoders can differ by a handful of bytes between Pillow/zlib versions.
+# Ignore those non-actionable differences so local and CI checks stay stable.
+MIN_SAVING_BYTES = 16
 
 
 def optimized_bytes(path: Path) -> bytes:
@@ -37,7 +40,7 @@ def main() -> int:
         candidate = optimized_bytes(path)
         before += len(original)
         after += min(len(original), len(candidate))
-        if len(candidate) < len(original):
+        if len(original) - len(candidate) >= MIN_SAVING_BYTES:
             changed += 1
             if args.write:
                 path.write_bytes(candidate)
