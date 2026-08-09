@@ -94,6 +94,10 @@ Real Linux Server
 4. [Files and Directories](04-files-and-directories.md) — create, inspect, copy, move, and remove filesystem objects.
 5. [Mounting and Storage](05-mounting-and-storage.md) — connect disks and storage to the Linux directory tree.
 
+### Command Ownership
+
+This chapter uses the smallest command needed to make each filesystem concept observable: `pwd`, guided `cd` forms, basic listing/creation, and storage inspection. [Chapter 04](../04-finding-your-tools%20-%20Learn%20Commands/README.md) then teaches those familiar tools as complete command-line workflows—with options, composition, help, editing, scripting, and scheduling. That later reuse is deliberate progression, not a second introduction.
+
 ## 📌 Chapter Goal
 
 By the end of this chapter, you should be able to look at a Linux path, understand where it leads, find important system data, and explain how storage becomes part of the filesystem.
@@ -101,3 +105,7 @@ By the end of this chapter, you should be able to look at a Linux path, understa
 ```text
 Cave Map → Filesystem → Directories → Files → Paths → Mounted Storage
 ```
+
+## 🧭 Chapter Navigation
+
+[← Meet the Caveman Chief](../02-Meet%20the%20Caveman%20Chief%20-%20Linux/README.md) · [Course Home](../README.md) · [Next: Finding Your Tools →](../04-finding-your-tools%20-%20Learn%20Commands/README.md)

@@ -72,3 +72,7 @@ Each lesson in this chapter will follow the same learning path:
 ---
 
 **The village is ready. It is time to meet its Chief.**
+
+## 🧭 Chapter Navigation
+
+[← Before Linux](../01-Before%20Linux/README.md) · [Course Home](../README.md) · [Next: The Cave Map →](../03-the-cave-map%20-%20FileSystem/README.md)

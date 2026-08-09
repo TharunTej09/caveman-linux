@@ -1,221 +1,102 @@
 # 02 — Important Linux Directories
 
-## 🧠 Big Question
+## 🎯 Learning Objectives
 
-**If everything in Linux begins at `/`, how do we know which cave holds what we need?**
+- Explain the purpose of the major directories beneath `/`.
+- Identify likely locations for user data, configuration, logs, programs, startup files, devices, and temporary data.
+- Use `cd` only as a guided way to visit these locations.
 
-## 🪨 Caveman Story
+## 🏕️ Caveman Story
 
-Chief Grog has one enormous cave system, but he does not throw everything into the same room.
+Chief Grog gives every cave a job. Families have bedrooms, rules stay in a protected locker, changing records enter a warehouse, shared tools have a workshop, and the fire-starting equipment stays near the entrance.
 
-Every cave has a purpose:
+The layout helps a villager predict where something belongs before searching the whole mountain.
 
-- Villagers sleep in the **home caves**.
-- Village rules stay in the **configuration locker**.
-- Shared tools belong in the **tool cave**.
-- Logs and changing supplies go to the **warehouse**.
-- The fire-starting equipment stays near the **village entrance**.
-
-Because every room has a known purpose, the villagers can find what they need without searching the entire mountain.
-
-Linux works the same way. Its important directories are specialised rooms beneath the root directory, `/`.
-
-## 🖼 Story Diagram
-
-### The Entire Cave Map
+## 🖼️ Big Concept Illustration
 
 ```text
-                              ROOT (/)
-                                  │
-        ┌────────┬────────┬───────┼───────┬────────┬────────┐
-        │        │        │       │       │        │        │
-      /home    /etc     /usr    /var    /opt     /boot    /tmp
-        │        │        │       │       │        │        │
-    Bedrooms   Rules     Tools  Warehouse  Extra   Engine  Temporary
-                                                    Room    Basket
-                                  │
-                           ┌──────┴──────┐
-                           │             │
-                         /dev          /proc
-                      Device Doors   Magic Window
+                               /
+       ┌──────┬─────┬─────┬─────┬─────┬──────┬─────┬─────┐
+     home    etc   usr   var   opt   boot   dev   proc  tmp
+      beds   rules tools stock extras start doors window basket
 ```
 
-Every branch begins at `/`, but each destination serves a different job.
-
-### A Picture for Each Directory
-
-| Linux Directory | Caveman Picture | What Belongs There |
+| Directory | Cave image | Main purpose |
 | --- | --- | --- |
-| `/home` | 🛖 **Bedrooms** | Each regular user normally receives a personal directory here. |
-| `/etc` | 🔐 **Rules locker** | System-wide configuration, service settings, users, and security records. |
-| `/usr` | 🧰 **Shared tool cave** | Most installed programs, libraries, and shared read-only data. |
-| `/var` | 📦 **Changing warehouse** | Logs, caches, queues, mail, and other data that changes while the system runs. |
-| `/opt` | 🧳 **Visiting trader's store** | Optional or third-party application packages. |
-| `/boot` | 🔥 **Engine room** | Files needed to start Linux, including the kernel and bootloader data. |
-| `/dev` | 🚪 **Device doors** | Interfaces representing disks, terminals, USB devices, and other hardware. |
-| `/proc` | 🪟 **Magic window** | Live, virtual information about the kernel and running processes. |
-| `/tmp` | 🧺 **Temporary basket** | Short-lived working files that applications do not need to keep permanently. |
+| `/home` | Bedrooms | Regular users' personal directories |
+| `/etc` | Rules locker | System-wide configuration |
+| `/usr` | Shared workshop | Most installed programs, libraries, and shared data |
+| `/var` | Changing warehouse | Logs, queues, caches, and other changing data |
+| `/opt` | Visiting trader's store | Optional or third-party applications |
+| `/boot` | Fire-starting room | Files needed during boot |
+| `/dev` | Device doors | Interfaces to disks, terminals, and devices |
+| `/proc` | Magic window | Live virtual kernel and process information |
+| `/tmp` | Temporary basket | Short-lived working files |
 
-> `/dev` and `/proc` look like ordinary directories, but Linux creates much of their content dynamically. They are views into devices and the running system, not normal storage rooms.
+## 📖 Concept Explained Simply
 
-## 🧩 Caveman → Computer Mapping
+Linux follows a broadly standard hierarchy so people and programs can predict locations. Exact contents vary by distribution.
 
-| Caveman World | Linux World |
-| --- | --- |
-| Entire mountain | Root filesystem (`/`) |
-| Villagers' bedrooms | User homes (`/home`) |
-| Village rulebook | Configuration (`/etc`) |
-| Shared tools | Programs and libraries (`/usr`) |
-| Changing warehouse | Logs and changing data (`/var`) |
-| Guest trader's equipment | Optional software (`/opt`) |
-| Fire-starting room | Boot files (`/boot`) |
-| Doors to physical tools | Device interfaces (`/dev`) |
-| Window into village activity | System and process information (`/proc`) |
-| Temporary basket | Temporary files (`/tmp`) |
+`/dev` and `/proc` are especially important: much of their content is created dynamically and represents devices or live system state rather than ordinary stored files. `/tmp` is not durable; cleanup policies may remove its contents. `/root` is the privileged root user's home, while `/` is the top of everything.
 
-## 💻 Technical Explanation
+### Why Should I Care?
 
-Linux follows a standard directory layout so people and programs know where different kinds of data should live. The exact contents vary between distributions, but the responsibilities remain broadly consistent.
+During an incident, knowing that configuration is commonly under `/etc` and logs under `/var/log` immediately narrows the search. The same layout appears inside VMs, containers, cloud hosts, and AI servers.
 
-### The Directories to Remember First
+## 🌍 Real Linux Example
 
-- **`/home` — user space:** Personal files and settings for regular users usually live here.
-- **`/etc` — system configuration:** Administrators commonly work here when configuring the operating system and services.
-- **`/usr` — installed software:** Contains many commands, libraries, and shared resources used by the system.
-- **`/var` — changing system data:** Important during troubleshooting because service and system logs are commonly stored below `/var/log`.
-- **`/opt` — optional applications:** Often used by self-contained third-party or commercial software.
-- **`/boot` — startup files:** Holds files used during the Linux boot process. Change its contents only when you understand the effect.
-- **`/dev` — devices as files:** Provides special interfaces through which Linux communicates with hardware and virtual devices.
-- **`/proc` — live system view:** A virtual filesystem exposing current kernel and process information.
-- **`/tmp` — temporary workspace:** Intended for temporary data. Do not treat it as permanent storage because cleanup policies may remove its contents.
+An engineer investigating Nginx may inspect configuration below `/etc/nginx`, logs below `/var/log/nginx`, and packaged program files below `/usr`. An AI service may place vendor software in `/opt` and mount large models elsewhere in the same tree.
 
-### One Easy-to-Miss Directory
+## 🛠️ Commands Introduced
 
-`/root` is the home directory of the privileged **root user**. It is not the same as `/`, which is the top of the entire filesystem.
-
-## 🌍 Real-World Example
-
-When a web service fails, an engineer may check its configuration under `/etc`, investigate its logs under `/var/log`, and identify its installed application files under `/usr` or `/opt`. Knowing the directory roles narrows the investigation immediately.
-
-## ☁ Cloud Example
-
-A Linux virtual machine in AWS, Azure, or Google Cloud uses the same directory ideas. Cloud-init settings may affect system configuration, application logs still commonly flow beneath `/var`, and users normally work inside `/home`.
-
-## 🤖 AI Infrastructure Example
-
-An AI inference server may keep the serving application under `/opt`, service configuration under `/etc`, changing logs under `/var`, and an engineer's scripts under `/home`. Large models and datasets may be mounted elsewhere, but they still join the same tree beneath `/`.
-
-## ⚡ Linux Commands
-
-### Change Your Current Directory
+This directory-tour lesson uses the basic form of one navigation command:
 
 ```bash
 cd /etc
 ```
 
-`cd` means **change directory**. It moves your terminal from its current directory to another directory.
+`cd` means **change directory**. Here it is used only to visit named system locations. Lesson 03 teaches special path forms; Chapter 04 teaches `cd` as part of complete command-line navigation.
 
-Useful forms of the same command:
+## 💡 Caveman Tip
 
-```bash
-cd /
-cd /home
-cd ..
-cd ~
-cd -
-```
+Learn a directory's responsibility, not a fixed list of every file it might contain.
 
-| Form | Where It Takes You |
-| --- | --- |
-| `cd /` | The root of the filesystem |
-| `cd /home` | The `/home` directory |
-| `cd ..` | The parent directory, one level upward |
-| `cd ~` | Your own home directory |
-| `cd -` | The directory you were in previously |
+## ⚠️ Common Mistakes
 
-This lesson intentionally introduces only `cd`. Commands for listing, creating, copying, and searching will appear in their own lessons.
+- Storing permanent data in `/tmp`.
+- Editing files in `/boot`, `/dev`, or `/proc` without understanding their role.
+- Confusing `/usr` with a specific user's home.
+- Assuming every distribution places every application in exactly the same location.
 
 ## 🧪 Hands-on Lab
 
-### Walk Through the Cave System
+Use only `cd` during this guided tour:
 
-1. Open a Linux terminal.
-2. Enter the root of the filesystem:
+```bash
+cd /
+cd /etc
+cd /var
+cd /home
+cd /tmp
+```
 
-   ```bash
-   cd /
-   ```
+Before each move, predict the kind of data associated with the destination. Do not modify system content. Return to `/` when finished.
 
-3. Visit the system configuration cave:
-
-   ```bash
-   cd /etc
-   ```
-
-4. Move one level back toward root:
-
-   ```bash
-   cd ..
-   ```
-
-5. Visit the changing-data warehouse:
-
-   ```bash
-   cd /var
-   ```
-
-6. Return to your personal home directory:
-
-   ```bash
-   cd ~
-   ```
-
-7. Jump back to the directory you just left:
-
-   ```bash
-   cd -
-   ```
-
-### Think Before You Move
-
-Which directory would you choose for each item?
-
-- A user's personal notes
-- A service configuration file
-- A system log
-- A temporary application file
-- Files required while Linux starts
-
-## 🎯 Interview Questions
-
-1. What is normally stored in `/home`?
-2. Why are `/etc` and `/var/log` important to system administrators?
-3. How are `/dev` and `/proc` different from normal storage directories?
-4. What is the difference between `/` and `/root`?
-5. Why should permanent data not be stored in `/tmp`?
-6. What do `cd ..`, `cd ~`, and `cd -` do?
-
-## 📌 Key Takeaways
-
-- Every important Linux directory belongs to one tree beginning at `/`.
-- `/home` holds user data, `/etc` holds configuration, and `/var` holds changing data.
-- `/usr` commonly holds installed software, while `/opt` is often used for optional applications.
-- `/boot`, `/dev`, and `/proc` connect you to startup, devices, and live system information.
-- `/tmp` is temporary and should not be trusted for permanent storage.
-- `cd` moves your terminal between directories.
-
-## 🪨 Caveman Summary
+## 📝 Quick Recap
 
 ```text
-One Mountain
-     ↓
-   Root (/)
-     ↓
-Specialised Caves
-     ↓
-Home · Rules · Tools · Logs · Devices
-     ↓
-Chief Grog chooses a destination
-     ↓
-Linux uses cd
+People → /home        Rules → /etc       Programs → /usr
+Changes → /var        Startup → /boot    Devices → /dev
+Live state → /proc    Temporary → /tmp   Optional apps → /opt
 ```
+
+## 🧠 Interview Questions
+
+1. Why are `/etc` and `/var/log` important during troubleshooting?
+2. How do `/dev` and `/proc` differ from ordinary storage?
+3. Why should `/tmp` not hold permanent data?
+4. What is the difference between `/`, `/root`, and `/home`?
+
+## 📚 What's Next
+
+Learn how Linux describes routes between these rooms in [03 — Linux Paths](03-paths.md).

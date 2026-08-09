@@ -63,3 +63,6 @@ By the end of this module, remember one connected idea:
 
 > **Clients ask, servers provide, hardware performs the work, software provides the instructions, and the operating system organizes everything.**
 
+## 🧭 Chapter Navigation
+
+[← Course Home](../README.md) · [Next: Meet the Caveman Chief →](../02-Meet%20the%20Caveman%20Chief%20-%20Linux/README.md)

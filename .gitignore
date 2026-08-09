@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*~
+__pycache__/
+*.py[cod]
+.venv/
+.image-tools/
+node_modules/
+npm-debug.log*
+*.log
+*.tmp
